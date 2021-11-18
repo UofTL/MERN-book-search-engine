@@ -30,7 +30,8 @@
         "url": "https://github.com/UofTL/MERN-book-search-engine/issues"
     },
     "dependencies": {
-        "if-env": "^1.0.4"
+        "if-env": "^1.0.4",
+        "apollo-server-express": "^2.15.0"
     },
     "devDependencies": {
         "concurrently": "^5.1.0"
