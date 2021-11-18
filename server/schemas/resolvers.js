@@ -9,7 +9,6 @@ const resolvers = {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                //.populate('savedBooks');
       
               return userData;
             }
@@ -19,7 +18,6 @@ const resolvers = {
     },
 
     Mutation: {
-        //login mutation, using email and password
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
       
@@ -37,21 +35,12 @@ const resolvers = {
             return { token, user };
           },
 
-        //create new user with username, email, password
         addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
             return { user, token };
-            // const user = await User.create(body);
-
-            // if (!user) {
-            //   return res.status(400).json({ message: 'Something is wrong!' });
-            // }
-            // const token = signToken(user);
-            // res.json({ token, user });
         },
 
-        //add book to user's collection
         saveBook: async (parent, args, context) => {
             if(context.user) {
                 const updatedUser = await User.findOneAndUpdate(
@@ -64,7 +53,6 @@ const resolvers = {
             throw new AuthenticationError("You are not logged in");
           },
         
-        //remove book from user's collection
         removeBook: async (parent, args, context) => {
             if (context.user) {
               console.log();
